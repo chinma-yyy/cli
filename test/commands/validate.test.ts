@@ -12,7 +12,7 @@ describe('validate', () => {
     beforeEach(() => {
       testHelper.createDummyContextFile();
     });
-    
+
     afterEach(() => {
       testHelper.deleteDummyContextFile();
     });
@@ -26,7 +26,7 @@ describe('validate', () => {
         expect(ctx.stderr).toEqual('');
         done();
       });
-    
+
     test
       .stderr()
       .stdout()
@@ -36,6 +36,15 @@ describe('validate', () => {
           'File ./test/specification-avro.yml is valid but has (itself and/or referenced documents) governance issues.\n'
         );
         expect(ctx.stderr).toEqual('');
+        done();
+      });
+
+    test
+      .stderr()
+      .stdout()
+      .command(['validate','./test/specification-invalid.yml'])
+      .it('throws error about the invalid specification file', (ctx,done) => {
+        expect(ctx.stderr).toMatch('File ./test/specification-invalid.yml and/or referenced documents have governance issues.\n\ntest/specification-invalid.yml');
         done();
       });
 
@@ -69,16 +78,16 @@ describe('validate', () => {
         done();
       });
   });
-  
+
   describe('with context names', () => {
     beforeEach(() => {
       testHelper.createDummyContextFile();
     });
-    
+
     afterEach(() => {
       testHelper.deleteDummyContextFile();
     });
-  
+
     test
       .stderr()
       .stdout()
@@ -89,7 +98,7 @@ describe('validate', () => {
         expect(ctx.stderr).toEqual('');
         done();
       });
-    
+
     test
       .stderr()
       .stdout()
@@ -100,7 +109,7 @@ describe('validate', () => {
         done();
       });
   });
-  
+
   describe('with no arguments', () => {
     beforeEach(() => {
       testHelper.createDummyContextFile();
@@ -110,7 +119,7 @@ describe('validate', () => {
       testHelper.setCurrentContext('home');
       testHelper.deleteDummyContextFile();
     });
-  
+
     test
       .stderr()
       .stdout()
@@ -121,7 +130,7 @@ describe('validate', () => {
         expect(ctx.stderr).toEqual('');
         done();
       });
-    
+
     test
       .stderr()
       .stdout()
@@ -147,7 +156,7 @@ describe('validate', () => {
         }
       }
     });
-    
+
     test
       .stderr()
       .stdout()
@@ -163,11 +172,11 @@ describe('validate', () => {
     beforeEach(() => {
       testHelper.createDummyContextFile();
     });
-    
+
     afterEach(() => {
       testHelper.deleteDummyContextFile();
     });
-  
+
     test
       .stderr()
       .stdout()
@@ -193,11 +202,11 @@ describe('validate', () => {
     beforeEach(() => {
       testHelper.createDummyContextFile();
     });
-    
+
     afterEach(() => {
       testHelper.deleteDummyContextFile();
     });
-  
+
     test
       .stderr()
       .stdout()
@@ -223,11 +232,11 @@ describe('validate', () => {
     beforeEach(() => {
       testHelper.createDummyContextFile();
     });
-    
+
     afterEach(() => {
       testHelper.deleteDummyContextFile();
     });
-  
+
     test
       .stderr()
       .stdout()

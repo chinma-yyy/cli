@@ -25,6 +25,16 @@ describe('models', () => {
       expect(ctx.stdout).toEqual('');
       done();
     });
+
+  test
+    .stderr()
+    .stdout()
+    .command([...generalOptions,'typescript','./test/specification-invalid.yml'])
+    .it('suggests the user about the failing errors in the file', (ctx,done) => {
+      expect(ctx.stdout).toMatch('Input is not a correct AsyncAPI document so it cannot be processed.\ntest/specification-invalid.yml');
+      done();
+    });
+
   test
     .stderr()
     .stdout()
